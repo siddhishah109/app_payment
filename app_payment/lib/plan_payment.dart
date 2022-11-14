@@ -10,6 +10,9 @@ class MyPayment extends StatefulWidget {
 }
 
 class _MyPaymentState extends State<MyPayment> {
+  var padding;
+  List<bool> _selections = List.generate(2, (_) => false);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,12 +54,124 @@ class _MyPaymentState extends State<MyPayment> {
               height: 20,
               thickness: 1,
               color: Color.fromARGB(255, 206, 206, 206),
-              indent: 25,
-              endIndent: 25),
+              indent: 20,
+              endIndent: 20),
           Container(
-              padding: const EdgeInsets.only(top: 100),
+            padding: const EdgeInsets.only(top: 20),
+            child: Row(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Text('Premium',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold)),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.only(top: 15, left: 20),
+            child: Row(
+              children: [
+                const Text(
+                  '\$9.99',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold),
+                ),
+                Container(
+                    padding: const EdgeInsets.only(left: 15, top: 12),
+                    child: const Text(
+                      '/month',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 138, 137, 137),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ))
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.only(top: 13, left: 20),
+            child: Row(
+              children: const [
+                Text(
+                  'Cancle anytime.',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 187, 184, 184),
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  ' Offer terms',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 88, 180, 216),
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  ' apply.',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 187, 184, 184),
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Divider(
+              height: 60,
+              thickness: 1,
+              color: Color.fromARGB(255, 206, 206, 206),
+              indent: 20,
+              endIndent: 20),
+          Container(
+              padding: EdgeInsets.only(top: 2, right: 175),
               child: Column(
-                children: [Text('Premium'), Text('9.99')],
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    ToggleButtons(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(6),
+                          child: const Text(
+                            'Credit card',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(6),
+                          child: const Text(
+                            'paytm',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        )
+                      ],
+                      isSelected: _selections,
+                      onPressed: (int index) {
+                        setState(() {
+                          _selections[index] = !_selections[index];
+                        });
+                      },
+                      borderRadius: BorderRadius.circular(5),
+                      borderColor: Colors.grey,
+                      color: Colors.black,
+                      selectedColor: Colors.black,
+                      fillColor: Color.fromARGB(211, 206, 206, 206),
+                    ),
+                  ])),
+          Container(
+              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  labelText: 'Enter Card number',
+                ),
+                style: const TextStyle(fontSize: 20),
               )),
         ]),
       ),
